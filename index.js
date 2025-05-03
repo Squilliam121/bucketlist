@@ -21,6 +21,37 @@ let itemEmoji = "🗺️"
 
 goalInput.value = ""
 
+let savedItems = JSON.parse(localStorage.getItem("goalList")) || [];
+
+savedItems.forEach(entry => {
+    const item = document.createElement('a');
+    const divider = document.createElement('hr');
+    item.textContent = `${entry.emoji} | ${entry.text}`;
+    item.classList.add("listitem");
+    divider.classList.add("divider")
+
+    if (entry.ticked) {
+        item.style.color = "#393939"; // Change text color to black
+        item.style.textDecoration = "line-through"; // Add strikethrough
+    }
+
+    item.addEventListener("click", () => {
+        entry.ticked = !entry.ticked;
+        if (entry.ticked) {
+            item.style.color = "#393939";
+            item.style.textDecoration = "line-through";
+        } else {
+            item.style.color = ""; // Reset text color
+            item.style.textDecoration = ""; // Remove strikethrough
+        }
+        localStorage.setItem("goalList", JSON.stringify(savedItems));
+    });
+
+
+    items.appendChild(item);
+    items.appendChild(divider);
+});
+
 function stageOne() {
     stage1.classList.remove("invis")
 }
@@ -50,9 +81,24 @@ function newListItem() {
     const divider = document.createElement('hr');
     item.textContent = itemEmoji + " | " + itemText;
     item.classList.add("listitem")
+    divider.classList.add("divider")
     const items = document.getElementById('items');
     items.appendChild(item);
     items.appendChild(divider);
+    
+    const newEntry = {
+        emoji: itemEmoji,
+        text: itemText
+    };
+
+    savedItems.push(newEntry);
+
+    localStorage.setItem("goalList", JSON.stringify(savedItems));
+}
+
+function eraseList() {
+    localStorage.clear();
+    window.location.href = "index.html"
 }
 
 function emoji1Pressed() {
