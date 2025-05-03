@@ -19,13 +19,13 @@ body{
     background-repeat: no-repeat;
     display: flex;
     align-items: center;
-
 }
 
 h1, h2, h3, h4, h5, h6, p, a, button{
     font-family: Sora;
     margin: 0;
     padding: 0;
+    text-decoration: none;
 }
 
 .invis{
@@ -71,9 +71,17 @@ h1, h2, h3, h4, h5, h6, p, a, button{
     margin: 20px;
     color: #ffffff;
     font-weight: 700; 
+    display: block;
+    transition: color .2s ease, text-decoration .2s ease;
 }
 
-#itembutton{
+.listitem:hover{
+    color: #787878;
+    text-decoration: line-through;
+    cursor: pointer;
+}
+
+#itembutton, #erasebutton{
     width: auto;
     height: 60px;
     font-size: 2rem;
@@ -85,7 +93,7 @@ h1, h2, h3, h4, h5, h6, p, a, button{
     transition: background-color .2s ease;
 }
 
-#itembutton:hover{
+#itembutton:hover, #erasebutton:hover{
     background-color: #0000006b;
 }
 
@@ -101,6 +109,12 @@ h1, h2, h3, h4, h5, h6, p, a, button{
     align-items: center;
     justify-content: center;
     transition: opacity 0.5s ease;
+}
+
+#items{
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 }
 
 #goal{
@@ -208,8 +222,11 @@ h1, h2, h3, h4, h5, h6, p, a, button{
     margin: 5px;
 }
 
-hr{
+.divider{
     height: .6px;
     background-color: #ffffff;
     color: white;
+    width: 700px;
+    align-self: center;
+    margin: 0 auto;
 }
