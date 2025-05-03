@@ -94,6 +94,7 @@ function newListItem() {
     savedItems.push(newEntry);
 
     localStorage.setItem("goalList", JSON.stringify(savedItems));
+    window.location.href = "index.html"
 }
 
 function eraseList() {
