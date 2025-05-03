@@ -38,6 +38,7 @@ function stageTwo() {
 
     itemText = goalInput.value
     goalInput.value = ""
+    itemEmoji = ""
     stage1.classList.add("invis")
     stage2.classList.remove("invis")
 }
