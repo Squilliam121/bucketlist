@@ -1,232 +1,220 @@
-@font-face {
-    font-family: Sora;
-    src: url(fonts/sora.ttf);
+const stage1 = document.getElementById("textmain")
+const stage2 = document.getElementById("emojimain")
+
+const emoji1 = document.getElementById("emoji1")
+const emoji2 = document.getElementById("emoji2")
+const emoji3 = document.getElementById("emoji3")
+const emoji4 = document.getElementById("emoji4")
+const emoji5 = document.getElementById("emoji5")
+const emoji6 = document.getElementById("emoji6")
+const emoji7 = document.getElementById("emoji7")
+const emoji8 = document.getElementById("emoji8")
+const emoji9 = document.getElementById("emoji9")
+
+const goalInput = document.getElementById("message")
+
+stage1.classList.add("invis")
+stage2.classList.add("invis")
+
+let itemText = "Travel the world!"
+let itemEmoji = "🗺️"
+
+goalInput.value = ""
+
+let savedItems = JSON.parse(localStorage.getItem("goalList")) || [];
+
+savedItems.forEach(entry => {
+    const item = document.createElement('a');
+    const divider = document.createElement('hr');
+    item.textContent = `${entry.emoji} | ${entry.text}`;
+    item.classList.add("listitem");
+    divider.classList.add("divider")
+
+    if (entry.ticked) {
+        item.style.color = "#393939"; // Change text color to black
+        item.style.textDecoration = "line-through"; // Add strikethrough
+    }
+
+    item.addEventListener("click", () => {
+        entry.ticked = !entry.ticked;
+        if (entry.ticked) {
+            item.style.color = "#393939";
+            item.style.textDecoration = "line-through";
+        } else {
+            item.style.color = ""; // Reset text color
+            item.style.textDecoration = ""; // Remove strikethrough
+        }
+        localStorage.setItem("goalList", JSON.stringify(savedItems));
+    });
+
+
+    items.appendChild(item);
+    items.appendChild(divider);
+});
+
+function stageOne() {
+    stage1.classList.remove("invis")
 }
 
-html, body{
-    height: 100%;
-    width: 100%;
-    overflow: hidden;
-    margin: 0;
-    padding: 0;
+function stageTwo() {
+    emoji2.style.backgroundColor = "#000000a3"
+    emoji3.style.backgroundColor = "#000000a3"
+    emoji4.style.backgroundColor = "#000000a3"
+    emoji5.style.backgroundColor = "#000000a3"
+    emoji6.style.backgroundColor = "#000000a3"
+    emoji7.style.backgroundColor = "#000000a3"
+    emoji8.style.backgroundColor = "#000000a3"
+    emoji9.style.backgroundColor = "#000000a3"
+    emoji1.style.backgroundColor = "#000000a3"
+
+    itemText = goalInput.value
+    goalInput.value = ""
+    itemEmoji = ""
+    stage1.classList.add("invis")
+    stage2.classList.remove("invis")
 }
 
-body{
-    height: 100%;
-    background-image: url("images/bg.png");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    display: flex;
-    align-items: center;
+function newListItem() {
+    stage1.classList.add("invis")
+    stage2.classList.add("invis")
+    const item = document.createElement('p');
+    const divider = document.createElement('hr');
+    item.textContent = itemEmoji + " | " + itemText;
+    item.classList.add("listitem")
+    divider.classList.add("divider")
+    const items = document.getElementById('items');
+    items.appendChild(item);
+    items.appendChild(divider);
+    
+    const newEntry = {
+        emoji: itemEmoji,
+        text: itemText
+    };
+
+    savedItems.push(newEntry);
+
+    localStorage.setItem("goalList", JSON.stringify(savedItems));
+    window.location.href = "index.html"
 }
 
-h1, h2, h3, h4, h5, h6, p, a, button{
-    font-family: Sora;
-    margin: 0;
-    padding: 0;
-    text-decoration: none;
+function eraseList() {
+    localStorage.clear();
+    window.location.href = "index.html"
 }
 
-.invis{
-    pointer-events: none;
-    opacity: 0;
+function emoji1Pressed() {
+    emoji2.style.backgroundColor = "#000000a3"
+    emoji3.style.backgroundColor = "#000000a3"
+    emoji4.style.backgroundColor = "#000000a3"
+    emoji5.style.backgroundColor = "#000000a3"
+    emoji6.style.backgroundColor = "#000000a3"
+    emoji7.style.backgroundColor = "#000000a3"
+    emoji8.style.backgroundColor = "#000000a3"
+    emoji9.style.backgroundColor = "#000000a3"
+    emoji1.style.backgroundColor ="rgb(0, 115, 4)"
+    itemEmoji = "✈️"
 }
 
-#main{
-    height: 100%;
-    width: 70%;
-    background-color: #000000c4;
-    backdrop-filter: blur(12px);
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
+function emoji2Pressed() {
+    emoji1.style.backgroundColor = "#000000a3"
+    emoji3.style.backgroundColor = "#000000a3"
+    emoji4.style.backgroundColor = "#000000a3"
+    emoji5.style.backgroundColor = "#000000a3"
+    emoji6.style.backgroundColor = "#000000a3"
+    emoji7.style.backgroundColor = "#000000a3"
+    emoji8.style.backgroundColor = "#000000a3"
+    emoji9.style.backgroundColor = "#000000a3"
+    emoji2.style.backgroundColor ="rgb(0, 115, 4)"
+    itemEmoji = "🗺️"
 }
 
-#list{
-    width: 70%;
-    padding: 0 50px;
-    border: none;
-    border-radius: 12px;
-    background-color: #0000007e;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    overflow-y: auto;
-    max-height: 500px;
+function emoji3Pressed() {
+    emoji2.style.backgroundColor = "#000000a3"
+    emoji1.style.backgroundColor = "#000000a3"
+    emoji4.style.backgroundColor = "#000000a3"
+    emoji5.style.backgroundColor = "#000000a3"
+    emoji6.style.backgroundColor = "#000000a3"
+    emoji7.style.backgroundColor = "#000000a3"
+    emoji8.style.backgroundColor = "#000000a3"
+    emoji9.style.backgroundColor = "#000000a3"
+    emoji3.style.backgroundColor ="rgb(0, 115, 4)"
+    itemEmoji = "🍕"
 }
 
-#heading{
-    text-align: center;
-    font-size: 4.4rem;
-    margin: 30px;
-    color: #ffffff;
-    font-weight: 700;
+function emoji4Pressed() {
+    emoji2.style.backgroundColor = "#000000a3"
+    emoji3.style.backgroundColor = "#000000a3"
+    emoji1.style.backgroundColor = "#000000a3"
+    emoji5.style.backgroundColor = "#000000a3"
+    emoji6.style.backgroundColor = "#000000a3"
+    emoji7.style.backgroundColor = "#000000a3"
+    emoji8.style.backgroundColor = "#000000a3"
+    emoji9.style.backgroundColor = "#000000a3"
+    emoji4.style.backgroundColor ="rgb(0, 115, 4)"
+    itemEmoji = "💼"
 }
 
-.listitem{
-    text-align: center;
-    font-size: 2rem;
-    margin: 20px;
-    color: #ffffff;
-    font-weight: 700; 
-    display: block;
-    transition: color .2s ease, text-decoration .2s ease;
+function emoji5Pressed() {
+    emoji2.style.backgroundColor = "#000000a3"
+    emoji3.style.backgroundColor = "#000000a3"
+    emoji4.style.backgroundColor = "#000000a3"
+    emoji1.style.backgroundColor = "#000000a3"
+    emoji6.style.backgroundColor = "#000000a3"
+    emoji7.style.backgroundColor = "#000000a3"
+    emoji8.style.backgroundColor = "#000000a3"
+    emoji9.style.backgroundColor = "#000000a3"
+    emoji5.style.backgroundColor ="rgb(0, 115, 4)"
+    itemEmoji = "😈"
 }
 
-.listitem:hover{
-    color: #787878;
-    text-decoration: line-through;
-    cursor: pointer;
+function emoji6Pressed() {
+    emoji2.style.backgroundColor = "#000000a3"
+    emoji3.style.backgroundColor = "#000000a3"
+    emoji4.style.backgroundColor = "#000000a3"
+    emoji5.style.backgroundColor = "#000000a3"
+    emoji1.style.backgroundColor = "#000000a3"
+    emoji7.style.backgroundColor = "#000000a3"
+    emoji8.style.backgroundColor = "#000000a3"
+    emoji9.style.backgroundColor = "#000000a3"
+    emoji6.style.backgroundColor ="rgb(0, 115, 4)"
+    itemEmoji = "🌌"
 }
 
-#itembutton, #erasebutton{
-    width: auto;
-    height: 60px;
-    font-size: 2rem;
-    color: #ffffff;
-    font-weight: 700; 
-    background-color: #00000000;
-    border: 0;
-    margin: 10px;
-    transition: background-color .2s ease;
+function emoji7Pressed() {
+    emoji2.style.backgroundColor = "#000000a3"
+    emoji3.style.backgroundColor = "#000000a3"
+    emoji4.style.backgroundColor = "#000000a3"
+    emoji5.style.backgroundColor = "#000000a3"
+    emoji6.style.backgroundColor = "#000000a3"
+    emoji1.style.backgroundColor = "#000000a3"
+    emoji8.style.backgroundColor = "#000000a3"
+    emoji9.style.backgroundColor = "#000000a3"
+    emoji7.style.backgroundColor ="rgb(0, 115, 4)"
+    itemEmoji = "🎉"
 }
 
-#itembutton:hover, #erasebutton:hover{
-    background-color: #0000006b;
+function emoji8Pressed() {
+    emoji2.style.backgroundColor = "#000000a3"
+    emoji3.style.backgroundColor = "#000000a3"
+    emoji4.style.backgroundColor = "#000000a3"
+    emoji5.style.backgroundColor = "#000000a3"
+    emoji6.style.backgroundColor = "#000000a3"
+    emoji7.style.backgroundColor = "#000000a3"
+    emoji1.style.backgroundColor = "#000000a3"
+    emoji9.style.backgroundColor = "#000000a3"
+    emoji8.style.backgroundColor ="rgb(0, 115, 4)"
+    itemEmoji = "🕺"
 }
 
-#textmain{
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    z-index: 10;
-    background-color: #000000c4;
-    backdrop-filter: blur(12px);
-    align-items: center;
-    justify-content: center;
-    transition: opacity 0.5s ease;
-}
-
-#items{
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-}
-
-#goal{
-    font-size: 2.8rem;
-    color: #ffffff;
-    font-weight: 700;
-    text-align: center; 
-    align-items: center;
-    margin: 5px;
-}
-
-#message{
-    height: 50px;
-    width: 600px;
-    border: 0;
-    font-family: Sora;
-    font-size: 1.4rem;
-    text-align: center;
-    color: #ffffff;
-    font-weight: 700;
-    background-color: #000000a3;
-    border-radius: 10px;
-}
-
-#message::placeholder{
-    color: #242424;
-}
-
-#entergoal{
-    width: 600px;
-    height: 50px;
-    font-size: 1.4rem;
-    border-radius: 10px;
-    color: #ffffff;
-    font-weight: 700; 
-    background-color: #000000a3;
-    border: 0;
-    margin: 10px;
-    transition: background-color .2s ease;
-}
-
-#entergoal:hover{
-    background-color: #000000;
-}
-
-#emojimain{
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    z-index: 10;
-    background-color: #000000c4;
-    backdrop-filter: blur(12px);
-    align-items: center;
-    justify-content: center;
-    transition: opacity 0.5s ease;
-}
-
-#emoji{
-    font-size: 2.8rem;
-    color: #ffffff;
-    font-weight: 700;
-    text-align: center; 
-    align-items: center;
-    margin: 10px;
-}
-
-#enteremoji{
-    width: 170px;
-    height: 50px;
-    font-size: 1.4rem;
-    border-radius: 10px;
-    color: #ffffff;
-    font-weight: 700; 
-    background-color: #000000a3;
-    border: 0;
-    margin: 10px;
-    transition: background-color .2s ease;
-}
-
-#enteremoji:hover{
-    background-color: #000000;
-}
-
-.emoji{
-    background-color: #000000a3;
-    border: 0;
-    border-radius: 10px;
-    height: 50px;
-    width: 50px;
-    font-size: 1.4rem;
-    transition: background-color .2s ease;
-}
-
-.emoji:hover{
-    background-color: #000000 !important;
-}
-
-#emojilist{
-    display: grid;
-    grid-template-rows: repeat(3, 1fr);
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-    margin: 5px;
-}
-
-.divider{
-    height: .6px;
-    background-color: #ffffff;
-    color: white;
-    width: 700px;
-    align-self: center;
-    margin: 0 auto;
+function emoji9Pressed() {
+    emoji2.style.backgroundColor = "#000000a3"
+    emoji3.style.backgroundColor = "#000000a3"
+    emoji4.style.backgroundColor = "#000000a3"
+    emoji5.style.backgroundColor = "#000000a3"
+    emoji6.style.backgroundColor = "#000000a3"
+    emoji7.style.backgroundColor = "#000000a3"
+    emoji1.style.backgroundColor = "#000000a3"
+    emoji8.style.backgroundColor = "#000000a3"
+    emoji9.style.backgroundColor ="rgb(0, 115, 4)"
+    itemEmoji = "🏆"
 }
