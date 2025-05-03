@@ -28,6 +28,18 @@ h1, h2, h3, h4, h5, h6, p, a, button{
     text-decoration: none;
 }
 
+#footer{
+    text-align: center;
+    font-size: .9rem;
+    margin: 0;
+    position: absolute;
+    bottom: 15px;
+    align-self: center;
+    color: #ffffff;
+    font-weight: 500; 
+    display: block;
+}
+
 .invis{
     pointer-events: none;
     opacity: 0;
