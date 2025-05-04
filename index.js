@@ -94,12 +94,12 @@ function newListItem() {
     savedItems.push(newEntry);
 
     localStorage.setItem("goalList", JSON.stringify(savedItems));
-    window.location.href = "index.html"
+    window.location.href = "./";
 }
 
 function eraseList() {
     localStorage.clear();
-    window.location.href = "index.html"
+    window.location.href = "./";
 }
 
 function emoji1Pressed() {
